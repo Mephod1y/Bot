@@ -1,10 +1,22 @@
-import os
 from difflib import get_close_matches
 from classes import AddressBook, Record, Address, Email, Birthday, CONTACTS 
-from main import input_error
 from datetime import datetime, timedelta, date
 import re
 from help import show_out_table
+
+def input_error(function):
+    def wrapper(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except KeyError as key_error:
+            return key_error
+        except ValueError as exception:
+            return exception.args[0]
+        except IndexError:
+            return 'Input name and phone number'
+        except TypeError:
+            return 'Wrong command'
+    return wrapper
 
 def hello_func():
     return "How can I help you?"
