@@ -1,10 +1,22 @@
-import os
 from difflib import get_close_matches
-from classes import AddressBook, Record, Address, Email, Birthday, CONTACTS 
-from main import input_error
+from classes import AddressBook, Record, CONTACTS
 from datetime import datetime, timedelta, date
 import re
 from help import show_out_table
+
+def input_error(function):
+    def wrapper(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except KeyError as key_error:
+            return key_error
+        except ValueError as exception:
+            return exception.args[0]
+        except IndexError:
+            return 'Input name and phone number'
+        except TypeError:
+            return 'Wrong command'
+    return wrapper
 
 def hello_func():
     return "How can I help you?"
@@ -217,7 +229,6 @@ def change_birthday_func():
 def delete_phone_func():
     name = name_input()
     while True:
-        # print("Phone to delete.")
         phone = phones_input()
         if phone[0] in CONTACTS[name].get_phones():
             CONTACTS[name].delete_phone(phone[0])

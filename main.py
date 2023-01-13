@@ -1,11 +1,9 @@
-from classes import AddressBook, Record
 from help import all_commands
 import book_commands
 import sys
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, dir_path)
-from book_commands import find_same_input
 
 COMMANDS =  {
     'hello': book_commands.hello_func,
@@ -34,20 +32,6 @@ COMMANDS =  {
     'search': book_commands.find_contacts
 }
 
-def input_error(function):
-    def wrapper(*args, **kwargs):
-        try:
-            return function(*args, **kwargs)
-        except KeyError as key_error:
-            return key_error
-        except ValueError as exception:
-            return exception.args[0]
-        except IndexError:
-            return 'Input name and phone number'
-        except TypeError:
-            return 'Wrong command'
-    return wrapper
-
 def main():
 
     print(f'Hello! I`m your Bot-assistant Ivan. How can I help you?')
@@ -64,8 +48,7 @@ def main():
 
             print(result)
         except KeyError:
-            find_same_input(command, COMMANDS)
-
+            book_commands.find_same_input(command, COMMANDS)
 
 if __name__ == '__main__':
     main()
