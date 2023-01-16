@@ -6,6 +6,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, dir_path)
 
 COMMANDS =  {
+
+    'help': all_commands,
     'hello': book_commands.hello_func,
     'exit': book_commands.exit_func,
     'close': book_commands.exit_func,
@@ -24,7 +26,6 @@ COMMANDS =  {
     'delete email': book_commands.delete_email_func,
     'delete birthday': book_commands.delete_birthday_func,
     'delete contact': book_commands.delete_contact_func,
-    'help': all_commands,
     'show all contacts': book_commands.show_all_info,
     'phone': book_commands.phone,
     'birthday contact': book_commands.show_birthday,
@@ -34,7 +35,7 @@ COMMANDS =  {
 
 def main():
 
-    print(f'Hello! I`m your Bot-assistant Ivan. How can I help you?')
+    print(f'Hello! I`m your Bot-assistant IVAN. How can I help you?')
     print('Тo see all commands type: help')
 
     while True:

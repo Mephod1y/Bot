@@ -2,7 +2,7 @@ from difflib import get_close_matches
 from classes import AddressBook, Record, CONTACTS
 from datetime import datetime, timedelta, date
 import re
-from help import show_out_table
+from help import OutInfo
 
 def input_error(function):
     def wrapper(*args, **kwargs):
@@ -155,7 +155,7 @@ def show_all_info():
     for users in CONTACTS.values():
         info_data.append(users.get_user_details())
     table_header = ('Name', 'Phones', 'Birthday', 'Address', 'Email',)
-    show_out_table(info_data, table_header)
+    OutInfo(info_data, table_header).out_info()
     return f''
 
 @input_error
@@ -180,7 +180,7 @@ def list_birthday():
     if not lst:
         return 'No one birthday at this period'
     table_header = ('Name', 'Phones', 'Birthday', 'Address', 'Email',)
-    show_out_table(lst, table_header)
+    OutInfo(lst, table_header).out_info()
     return " "
 
 @input_error

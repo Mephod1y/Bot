@@ -1,7 +1,16 @@
 from tabulate import tabulate
+from abc import ABC, abstractmethod
 
-def show_out_table(data, headers='firstrow', format='pipe'):
-    print(tabulate(data, headers=headers, tablefmt=format, showindex='always'))
+class Output(ABC):
+    @abstractmethod
+    def out_info(self):
+        pass
+class OutInfo(Output):
+    def __init__(self, data, header_table):
+        self.data = data
+        self.headers = header_table
+    def out_info(self):
+        print(tabulate(self.data, headers=self.headers, tablefmt= 'pipe', showindex='always'))
 
 def all_commands():
 
@@ -34,7 +43,5 @@ def all_commands():
 
         ]
 
-    table_header = ['DESCRIPTION', 'COMMAND']
-    show_out_table(help_list, table_header)
-
+    OutInfo(help_list,['DESCRIPTION', 'COMMAND']).out_info()
     return f''
